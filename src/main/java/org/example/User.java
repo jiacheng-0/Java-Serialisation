@@ -3,6 +3,8 @@ package org.example;
 import java.io.*;
 
 public class User implements Serializable {
+
+    private static final long serialVersionUID  = 20250306;
     String name;
     transient String password; // doesn't serialise it
 
@@ -21,7 +23,8 @@ public class User implements Serializable {
             FileOutputStream fileOutputStream = new FileOutputStream("UserInfo.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOutputStream);
 
-            System.out.println(ObjectStreamClass.lookup(user.getClass()).getSerialVersionUID());
+            long serialID = ObjectStreamClass.lookup(user.getClass()).getSerialVersionUID();
+            System.out.println(serialID);
             out.writeObject(user);  // 9008275230601175212
 
             out.close();
