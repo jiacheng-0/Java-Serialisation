@@ -4,7 +4,7 @@ import java.io.*;
 
 public class User implements Serializable {
     String name;
-    String password;
+    transient String password; // doesn't serialise it
 
     public void sayHello() {
         System.out.println("Hello " + name);
@@ -21,7 +21,8 @@ public class User implements Serializable {
             FileOutputStream fileOutputStream = new FileOutputStream("UserInfo.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOutputStream);
 
-            out.writeObject(user);
+            System.out.println(ObjectStreamClass.lookup(user.getClass()).getSerialVersionUID());
+            out.writeObject(user);  // 9008275230601175212
 
             out.close();
             fileOutputStream.close();

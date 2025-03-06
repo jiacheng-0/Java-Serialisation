@@ -12,6 +12,8 @@ public class Main_Deserialise {
             ObjectInputStream in = new ObjectInputStream(fileIn);
             user = (User) in.readObject();
 
+            System.out.println(ObjectStreamClass.lookup(user.getClass()).getSerialVersionUID());
+
             in.close();
             fileIn.close();
 
